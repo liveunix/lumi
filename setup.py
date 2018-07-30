@@ -1,8 +1,6 @@
-#!/usr/bin/env python
+import setuptools
 
-from distutils.core import setup
-
-setup(
+setuptools.setup(
     name='LUMI',
     version='0.1.0',
     description='',

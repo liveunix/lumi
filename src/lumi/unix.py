@@ -2,16 +2,17 @@ from shutil import which
 import subprocess
 
 # Return True if device is mounted
+# device is the uuid
 def is_device_mounted(device):
-    df = subprocess.run('df', stdout=subprocess.PIPE).stdout.decode('utf-8')
-    for lines in df[1:].splitlines():
-        if lines.split()[0] == device:
+    device_fs = subprocess.run(['blkid', '--uuid', device], stdout=subprocess.PIPE).stdout.decode('utf-8')
+    df = subprocess.run(['df', '--type=vfat', '--output=source'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+    for lines in df.splitlines()[1:]:
+        if lines.strip() == device_fs.strip():
             return True
     return False
 
 # Mount a device
 def mount(device):
-    # Use fdisk
     pass
 
 # Get all devices suitable for installation

@@ -1,22 +1,32 @@
-import subprocess
+import json
+import sh
+import libmount as mnt
 from xdg.BaseDirectory import xdg_data_home
-from shutil import which
 
 # Return True if device is mounted
-# device is the uuid
-def is_device_mounted(device):
-    device_fs = subprocess.run(['blkid', '--uuid', device], stdout=subprocess.PIPE).stdout.decode('utf-8')
-    df = subprocess.run(['df', '--output=source'], stdout=subprocess.PIPE).stdout.decode('utf-8')
-    for lines in df.splitlines()[1:]:
-        if lines.strip() == device_fs.strip():
-            return True
-    return False
+def is_device_mounted(device_uuid):
+    device_fs = sh.blkid('--uuid', device_uuid).stdout.strip()
+    mountpoint = lsblk('MOUNTPOINT', device_fs)[0]['mountpoint']
+    if mountpoint == None:
+        return False
+    return True
 
 # Mount a device
 # device is a uuid
-def mount(device):
-    if is_device_mounted(device):
+def mount(device_uuid):
+    if is_device_mounted(device_uuid):
         raise Exception("Device is already mounted")
+
+# Get info about a single device, device arg should the name (eg. /dev/sdc1)
+def get_device_data(data_cols, device):
+    output = json.loads(sh.lsblk(device, paths=True, nodeps=True, inverse=True, json=True, output=data_cols ).stdout)
+    return output['blockdevices']
+
+# Get filesystems and partitions
+def get_devices_data(data_cols):
+    output = json.loads(sh.lsblk(paths=True, nodeps=True, inverse=True, json=True, output=data_cols).stdout)
+    return output['blockdevices']
+
 
 # Get the next available mount point
 def get_new_mount_target():
@@ -25,13 +35,17 @@ def get_new_mount_target():
     # Path where the device should be mounted
     target_path = xdg_data_home + '/lumi/dev'
     is_available = False
+
     # While we have not found a valid path available
+    df = sh.df(portability=True).stdout.decode('utf-8')
     while not is_available:
         i += 1
         is_available = True
-        df = subprocess.run(['df', '--output=target'], stdout=subprocess.PIPE).stdout.decode('utf-8')
-        for s in df.splitlines()[1:]:
-            if target_path + str(i) == s.strip():
+        for s in df.split('\n')[1:]:
+            # It is not long enough to contain the column we need
+            if len(s) < 6:
+                continue
+            if target_path + str(i) == s.split()[5].strip():
                 is_available = False
 
     return target_path + str(i)
@@ -44,9 +58,4 @@ def get_devices():
 # Get all devices loaded in lumi
 def get_mounted_devices():
     pass
-
-def check_grub_executable():
-    grub_install_exe = which("grub-install2")
-    if grub_install_exe == None:
-        raise Exception("No grub-install executable in PATH")
 

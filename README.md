@@ -1,4 +1,4 @@
-# LUMI
+# LUMI ( LiveUnix Multiboot ISO )
 
 ## License
 

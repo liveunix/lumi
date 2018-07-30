@@ -10,3 +10,4 @@ def grub_install(device):
         pass
 
 if __name__ == "__main__":
+    pass

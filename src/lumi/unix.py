@@ -64,7 +64,14 @@ def get_new_mount_target():
 
 # Get all devices suitable for installation
 def get_devices():
-    pass
+    devices = get_devices_data('NAME,LABEL,UUID,RM,MOUNTPOINT')
+    suitable_devices = []
+
+    for d in devices:
+        if d['rm'] == '1':
+            suitable_devices.append(d.copy())
+
+    return suitable_devices
 
 # Get all devices loaded in lumi
 def get_enabled_devices():

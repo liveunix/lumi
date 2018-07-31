@@ -1,4 +1,5 @@
 from devices import *
+from pathlib import Path
 import sh
 
 def install_grub(partition_fs):

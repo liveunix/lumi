@@ -105,6 +105,8 @@ venv.bak/
 
 # editor stuff
 .vscode/
+.idea
 
-#gui files
+# gui files
 gui_files/
+

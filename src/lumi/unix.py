@@ -5,14 +5,11 @@ from xdg.BaseDirectory import xdg_data_home
 
 # Return True if device is mounted
 def is_device_mounted(device_uuid):
-    device_fs = sh.blkid('--uuid', device_uuid).stdout.strip()
-    mountpoint = lsblk('MOUNTPOINT', device_fs)[0]['mountpoint']
-    if mountpoint == None:
+    if get_mountpoint(device_uuid) == None:
         return False
     return True
 
 # Mount a device
-# device is a uuid
 def mount(device_uuid):
     if is_device_mounted(device_uuid):
         raise Exception("Device is already mounted")
@@ -20,13 +17,27 @@ def mount(device_uuid):
 # Get info about a single device, device arg should the name (eg. /dev/sdc1)
 def get_device_data(data_cols, device):
     output = json.loads(sh.lsblk(device, paths=True, nodeps=True, inverse=True, json=True, output=data_cols ).stdout)
-    return output['blockdevices']
+    return output['blockdevices'][0]
 
 # Get filesystems and partitions
 def get_devices_data(data_cols):
     output = json.loads(sh.lsblk(paths=True, nodeps=True, inverse=True, json=True, output=data_cols).stdout)
     return output['blockdevices']
 
+# Get uuid from a device name
+def get_uuid(device):
+    device_fs = sh.blkid('--uuid', device_uuid).stdout.strip()
+
+def get_mountpoint(device_uuid):
+    device_fs = sh.blkid('--uuid', device_uuid).stdout.strip()
+    info = get_device_data('MOUNTPOINT,UUID', device_fs)
+
+    # If the uuid returned by lsblk is different then the one we passed to blkid
+    # it means that another device has replaced the one we were working on
+    if info['uuid'] != device_uuid:
+        raise Exception("Device has been changed")
+
+    return info['mountpoint']
 
 # Get the next available mount point
 def get_new_mount_target():
@@ -56,6 +67,6 @@ def get_devices():
     pass
 
 # Get all devices loaded in lumi
-def get_mounted_devices():
+def get_enabled_devices():
     pass
 

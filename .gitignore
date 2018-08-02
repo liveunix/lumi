@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# editor stuff
+.vscode/
+
+#gui files
+gui_files/

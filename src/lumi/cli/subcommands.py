@@ -78,9 +78,9 @@ SUBCOMMANDS = [
         ],
     },
     {
-        'command': 'help',
+        'command': 'version',
         'require_options': False,
-        'description': 'Get information about LUMI',
+        'description': '',
         'arguments': [],
-    },
+    }
 ]

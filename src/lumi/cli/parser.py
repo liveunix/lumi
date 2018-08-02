@@ -5,7 +5,7 @@ from .subcommands import SUBCOMMANDS
 
 parser = ArgumentParser()
 register_options(parser)
-subparsers = parser.add_subparsers()
+subparsers = parser.add_subparsers(dest='command')
 
 for subcommand in SUBCOMMANDS:
     subparser = subparsers.add_parser(subcommand['command'], help=subcommand['description'])

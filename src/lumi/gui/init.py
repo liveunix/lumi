@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5 import QtWidgets
-from gui_core import Ui_Dialog
+from core import Ui_Dialog
 
 class ApplicationWindow(QtWidgets.QWidget):
     def __init__(self):

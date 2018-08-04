@@ -16,6 +16,29 @@ Here it's a list of all the available commands:
 | `lumi add <name:version> <device>`                         | Add the distro (or stage3) installer on the device          | `lumi add exherbo:20180618 /dev/sdb -a i686` |
 | `lumi delete <distro:version> <device>`                    | Remove the distro (or stage3) installer from the device     | `lumi delete ubuntu:18.04 /dev/sdb`          |
 | `lumi [command] -h` or `lumi [command] --help`             | Get information about the commands or a specific one        | `lumi list-all --help`                       |
+=======
+## Contributing
+
+### Installation
+
+We recommend to use `virtualenv` as environment for Python development.
+
+```shell
+virtualenv venv
+```
+
+Clone this repository:
+
+```shell
+git clone git@github.com:liveunix/lumi
+```
+
+Then switch to _virtualenv_ and install the dependencies:
+
+```shell
+source venv/bin/activate
+venv/bin/pip install -r requirements.txt
+```
 
 ## License
 

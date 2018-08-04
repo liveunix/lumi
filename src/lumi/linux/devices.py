@@ -41,7 +41,8 @@ def has_partition_changed(device_fs):
 
 def get_new_mount_target():
     """Get the next available mount point.
-       Check all the mounted devices, not only the one handled by LUMI.
+
+    Check all the mounted devices, not only the one handled by LUMI.
     """
     i = -1
     target_path = xdg_data_home + '/lumi/dev'

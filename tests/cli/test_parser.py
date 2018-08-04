@@ -1,6 +1,5 @@
 import unittest
-from .parser import parse_args
-
+from src.lumi.cli.parser import parse_args
 
 class TestParser(unittest.TestCase):
     """Tests CLI arguments parser"""

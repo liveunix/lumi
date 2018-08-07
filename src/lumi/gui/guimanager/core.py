@@ -2,14 +2,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
+_translate = QtCore.QCoreApplication.translate
 class Ui_Dialog(object):
 
-    def set_event_handler(self, event_handler):
-        self.event_handler = event_handler
-
-    def setupUi(self):
-
+    def setup_ui_dialog(self):
         # initializing Dialog window
         self.setObjectName("Dialog")
         self.resize(721, 424)
@@ -35,8 +31,28 @@ class Ui_Dialog(object):
         self.tabWidget.setTabBarAutoHide(False)
         self.tabWidget.setObjectName("tabWidget")
 
-        _translate = QtCore.QCoreApplication.translate
-        for index, tabname in enumerate(['tab', 'tabddd']):
+    def set_buddies(self):
+        # set buddies
+        self.installed_distro_list_label.setBuddy(self.installed_distros_listWidget)
+        self.installed_stage3_files_label.setBuddy(self.installed_stage3_listWidget)
+        self.available_distro_list_label.setBuddy(self.available_distros_listWidget)
+        self.available_stage3_files_label.setBuddy(self.available_stage3_listWidget)
+        self.distro_description_label.setBuddy(self.distro_description_textBrowser)
+            
+        self.tabWidget.setCurrentIndex(1)
+        self.available_distros_listWidget.setCurrentRow(-1)
+        QtCore.QMetaObject.connectSlotsByName(self)
+        
+        # add horizontal layout with index 5 to the 'gridLayout' gridLayout
+        self.gridLayout.addLayout(self.horizontalLayout_5, 0, 0, 1, 1)
+
+        # add vertical layout with index 2 to horizontal layout with index 5
+        self.horizontalLayout_5.addLayout(self.verticalLayout_2)
+
+        # add tabWidget to vertical layout with index 2
+        self.verticalLayout_2.addWidget(self.tabWidget)
+
+    def setup_tab_structure_with_index_and_name(self, index, tabname):
             # create a tab named 'tab'
             self.tab = QtWidgets.QWidget()
             self.tab.setObjectName(tabname)
@@ -206,9 +222,10 @@ class Ui_Dialog(object):
             # create a 'progressBar' progressBar
             self.progressBar = QtWidgets.QProgressBar(self.tab)
             self.progressBar.setAutoFillBackground(False)
-            self.progressBar.setProperty("value", 55)
-            self.progressBar.setInvertedAppearance(False)
-            self.progressBar.setObjectName("progressBar")
+            self.progressBar.setRange(0, 100)
+            self.progressBar.setProperty("value", 12)
+            self.progressBar.setInvertedAppearance(True)
+            self.progressBar.setObjectName("progressBar_%d" % index)
 
             # add 'progressBar' progressBar widget to horizontl layout with index 0
             self.horizontalLayout.addWidget(self.progressBar)
@@ -221,28 +238,8 @@ class Ui_Dialog(object):
             self.tabWidget.setTabText(index, _translate("Dialog", tabname))
             self.tabWidget.setCurrentIndex(index)
         
-        # set buddies
-        self.installed_distro_list_label.setBuddy(self.installed_distros_listWidget)
-        self.installed_stage3_files_label.setBuddy(self.installed_stage3_listWidget)
-        self.available_distro_list_label.setBuddy(self.available_distros_listWidget)
-        self.available_stage3_files_label.setBuddy(self.available_stage3_listWidget)
-        self.distro_description_label.setBuddy(self.distro_description_textBrowser)
-            
-        self.tabWidget.setCurrentIndex(1)
-        self.available_distros_listWidget.setCurrentRow(-1)
-        QtCore.QMetaObject.connectSlotsByName(self)
-        
-        # add horizontal layout with index 5 to the 'gridLayout' gridLayout
-        self.gridLayout.addLayout(self.horizontalLayout_5, 0, 0, 1, 1)
 
-        # add vertical layout with index 2 to horizontal layout with index 5
-        self.horizontalLayout_5.addLayout(self.verticalLayout_2)
-
-        # add tabWidget to vertical layout with index 2
-        self.verticalLayout_2.addWidget(self.tabWidget)
-
-    def retranslateUi(self):
-        _translate = QtCore.QCoreApplication.translate
+    def retranslate_ui_dialog(self):
         self.setWindowTitle(_translate("Dialog", "Dialog"))
         self.installed_distro_list_label.setText(_translate("Dialog", "I&nstalled distros"))
         __sortingEnabled = self.installed_distros_listWidget.isSortingEnabled()

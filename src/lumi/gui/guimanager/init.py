@@ -6,19 +6,23 @@ from guimanager.eventhandler import GUIEventHandler
 
 class ApplicationWindow(QtWidgets.QWidget, Ui_Dialog, GUIEventHandler):
     
-    def __init__(self):
-        super(ApplicationWindow, self).__init__()
+    def _construct_qapplication(self):
+        self.app = QtWidgets.QApplication(sys.argv)
 
+    def _setup_ui(self):
         self.setup_ui_dialog()  
         for index, tabname in enumerate(['tab', 'tabddd']):
             self.setup_tab_structure_with_index_and_name(index, tabname)
         self.set_buddies()   
         self.retranslate_ui_dialog()
 
-        self.route_callbacks_to_objects()
+    def __init__(self):
+        self._construct_qapplication()
+        super(ApplicationWindow, self).__init__()
 
-def main():
-    app = QtWidgets.QApplication(sys.argv)
-    application = ApplicationWindow()
-    application.show()
-    sys.exit(app.exec_())
+        self._setup_ui()
+        self.route_callbacks_to_objects()
+    
+    def run(self):
+        self.show()
+        sys.exit(self.app.exec_())

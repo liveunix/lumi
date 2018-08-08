@@ -7,19 +7,19 @@ from importlib import import_module
 
 class GUIEventHandler():
     
-    def get_gui_object_by_name(self, object_name):
+    def _get_gui_object_by_name(self, object_name):
         return getattr(self, object_name)
     
-    def get_object_event_attribute_by_name(self,gui_object ,trigger_event):
+    def _get_object_event_attribute_by_name(self,gui_object ,trigger_event):
         return getattr(gui_object, trigger_event)
 
-    def get_module_object_by_path(self, module_path):
+    def _get_module_object_by_path(self, module_path):
         return import_module(module_path)
     
-    def get_callback_class_by_module_and_name(self, module, function_name):
+    def _get_callback_class_by_module_and_name(self, module, function_name):
         return getattr(module, function_name)
 
-    def split_path_into_module_and_function(self, callback_path):
+    def _split_path_into_module_and_function(self, callback_path):
         """@return : a dict with 'module' and 'class_name' indexes.
            example: callbacks.example_callbacks.callback_class
                     {'module': callbacks.example_callbacks,
@@ -36,12 +36,12 @@ class GUIEventHandler():
             trigger_event = ROUTING[object_name]['trigger_event']
             callbacks_paths_list = ROUTING[object_name]['callback_functions']
 
-            gui_object = self.get_gui_object_by_name(object_name)
-            event = self.get_object_event_attribute_by_name(gui_object, trigger_event)
+            gui_object = self._get_gui_object_by_name(object_name)
+            event = self._get_object_event_attribute_by_name(gui_object, trigger_event)
 
             for callback_class_path in callbacks_paths_list:
-                path_info = self.split_path_into_module_and_function(callback_class_path)
-                module = self.get_module_object_by_path(path_info['module'])
-                callback_class = self.get_callback_class_by_module_and_name(module, path_info['class_name'])
+                path_info = self._split_path_into_module_and_function(callback_class_path)
+                module = self._get_module_object_by_path(path_info['module'])
+                callback_class = self._get_callback_class_by_module_and_name(module, path_info['class_name'])
 
                 event.connect(partial(callback_class.init(self)))

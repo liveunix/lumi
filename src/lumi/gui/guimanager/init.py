@@ -3,6 +3,7 @@ import sys
 from PyQt5 import QtWidgets
 from guimanager.core import Ui_Dialog
 from guimanager.eventhandler import GUIEventHandler
+from callbacks.callbacks_routing import ROUTING_OPTIONS
 
 class ApplicationWindow(QtWidgets.QWidget, Ui_Dialog, GUIEventHandler):
     
@@ -21,7 +22,8 @@ class ApplicationWindow(QtWidgets.QWidget, Ui_Dialog, GUIEventHandler):
         super(ApplicationWindow, self).__init__()
 
         self._setup_ui()
-        self.route_callbacks_to_objects()
+
+        self.route_callbacks_to_objects(ROUTING_OPTIONS)
     
     def run(self):
         self.show()

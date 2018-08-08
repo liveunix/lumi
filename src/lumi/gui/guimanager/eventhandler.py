@@ -1,6 +1,4 @@
 from functools import partial
-
-from callbacks.callbacks_routing import ROUTING
 from PyQt5.QtCore import pyqtSignal as EVENT
 
 from importlib import import_module 
@@ -31,10 +29,10 @@ class GUIEventHandler():
         }
 
 
-    def route_callbacks_to_objects(self):
-        for object_name in ROUTING:
-            trigger_event = ROUTING[object_name]['trigger_event']
-            callbacks_paths_list = ROUTING[object_name]['callback_functions']
+    def route_callbacks_to_objects(self, routing_options):
+        for object_name in routing_options:
+            trigger_event = routing_options[object_name]['trigger_event']
+            callbacks_paths_list = routing_options[object_name]['callback_functions']
 
             gui_object = self._get_gui_object_by_name(object_name)
             event = self._get_object_event_attribute_by_name(gui_object, trigger_event)

@@ -1,4 +1,4 @@
-class print_ok:
+class it_works:
     def __init__(self, application):
         self.application = application
 
@@ -9,5 +9,4 @@ class print_ok:
         return istance.main
     
     def main(self):
-        print("OK")
-        
+        print("It Works")

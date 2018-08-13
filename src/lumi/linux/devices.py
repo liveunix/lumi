@@ -1,7 +1,7 @@
 import json
 import sh
 import libmount as mnt
-from os import getuid, getgid
+from os import getuid, getgid, makedirs
 from pathlib import Path
 from xdg.BaseDirectory import xdg_data_home
 
@@ -11,12 +11,13 @@ def is_partition_mounted(device_fs):
         return False
     return True
 
-def mount(partition_fs, mountpoint):
-    """Mount a partition in the selected mountpoint"""
-    if is_partition_mounted(device_fs):
-        raise Exception("Device is already mounted")
+# Mount a partition in a new lumi mountpoint
+def mount(partition_fs):
+    if is_partition_mounted(partition_fs):
+        return
 
-    sh.sudo.mount(partition_fs, mountpoint, uid=getuid(), gid=getgid(), chmod='0777')
+    option_flags = 'uid=' + str(getuid()) + ',gid=' + str(getgid())
+    sh.contrib.sudo.mount(partition_fs, setup_new_mountpoint(), options=option_flags)
 
 def get_partition(partition_name):
     """Get info about a single device (e.g. /dev/sdc1)"""
@@ -39,11 +40,10 @@ def has_partition_changed(device_fs):
         if d['name'] == device_fs and info['uuid'] != device_uuid:
             raise Exception("Device has been changed")
 
-def get_new_mount_target():
-    """Get the next available mount point.
-
-    Check all the mounted devices, not only the one handled by LUMI.
-    """
+# Get the next available mount point
+# Check all devices mounted, not only the one handled by lumi
+def setup_new_mountpoint():
+    # Start from -1 because there is an increment at the start
     i = -1
     target_path = xdg_data_home + '/lumi/dev'
 
@@ -58,7 +58,13 @@ def get_new_mount_target():
             if target_path + str(i) == s.split()[5].strip():
                 valid_path_found = False
 
-    return target_path + str(i)
+    final_path = target_path + str(i)
+
+    if not Path(final_path).exists():
+        # Create the new mountpoint
+        makedirs(final_path)
+
+    return final_path
 
 def get_all_devices():
     """Get all the devices available for the installation"""

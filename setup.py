@@ -1,10 +1,16 @@
-import setuptools
+from setuptools import setup, find_packages
 
-setuptools.setup(
-    name='LUMI',
-    version='0.1.0',
+setup(
+    name='lumi',
     description='',
+    version='0.1.0',
     author='Danilo Spinella, Luca Di Vita, Domenico Corvasce',
     author_email='danyspin97@protonmail.com, d.v.luca99@gmail.com, dom.corvasce@yandex.com',
-    url='https://www.liveunix.org'
+    url='https://www.liveunix.org',
+    packages = find_packages('src'),
+    package_dir={'': 'src'},
+    entry_points={
+        'console_scripts': ['lumi-cli=lumi.gui:main'],
+    }
 )
+

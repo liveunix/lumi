@@ -1,19 +1,19 @@
 from functools import partial
 from PyQt5.QtCore import pyqtSignal as EVENT
 
-from importlib import import_module 
+from importlib import import_module
 
 class GUIEventHandler():
-    
+
     def _get_gui_object_by_name(self, object_name):
         return getattr(self, object_name)
-    
+
     def _get_object_event_attribute_by_name(self,gui_object ,trigger_event):
         return getattr(gui_object, trigger_event)
 
     def _get_module_object_by_path(self, module_path):
         return import_module(module_path)
-    
+
     def _get_callback_class_by_module_and_name(self, module, function_name):
         return getattr(module, function_name)
 

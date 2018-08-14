@@ -1,9 +1,9 @@
 import sys
 
 from PyQt5 import QtWidgets
-from guimanager.core import Ui_Dialog
-from guimanager.eventhandler import GUIEventHandler
-from callbacks.callbacks_routing import ROUTING_OPTIONS
+from .core import Ui_Dialog
+from .eventhandler import GUIEventHandler
+from ..callbacks.callbacks_routing import ROUTING_OPTIONS
 
 class ApplicationWindow(QtWidgets.QWidget, Ui_Dialog, GUIEventHandler):
     

@@ -1,3 +1,5 @@
+from ..linux import data
+
 def dispatch(action):
-    """Callback for the 'sync' command"""
+    data.sync()
     pass

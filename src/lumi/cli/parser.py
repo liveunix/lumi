@@ -17,6 +17,6 @@ for subcommand in SUBCOMMANDS:
         register_options(subparser)
 
 
-def parse_args(args=argv):
+def parse_args():
     """Parse the given commands using the declared parser"""
-    return parser.parse_args(args)
+    return parser.parse_args()

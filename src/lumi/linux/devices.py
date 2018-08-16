@@ -4,6 +4,7 @@ import libmount as mnt
 from os import getuid, getgid, makedirs
 from pathlib import Path
 from xdg.BaseDirectory import xdg_data_home
+from . import grub
 
 def is_partition_mounted(device_fs):
     """Return True if device is mounted"""
@@ -106,3 +107,16 @@ def add_enabled_partition(partition_fs):
 
         partition_data['installed'] = installed
         json_data.write(json.dumps(device_data))
+
+def setup_device(partition_fs):
+    partition = get_partition(partition_fs)
+    partition_status = Path(partition['mountpoint'] + '/lumi.json')
+
+    if not partition_status.exists():
+        data.initialize(partition_fs)
+        grub.install_grub(partition_fs)
+    else:
+        grub.update_grub(partition_fs)
+
+    grub.install_theme(partition_fs)
+

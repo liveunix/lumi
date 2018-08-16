@@ -1,8 +1,7 @@
-from devices import *
 from pathlib import Path
 import sh
 
-def install_grub(partition_fs):
+def install(partition_fs):
     partition = get_partition(partition_fs)
 
     grub_i386_dir = Path('/usr/lib/grub/i386-pc')
@@ -21,7 +20,7 @@ def install_grub(partition_fs):
 
     return sh.grub_install(version=True)
 
-def update_grub(partition_fs):
+def update(partition_fs):
     mountpoint = get_partition(partition_fs)['mountpoint']
 
     sh.contrib.sudo.rm(mountpoint + '/EFI', recursive=True, force=True)
@@ -29,17 +28,6 @@ def update_grub(partition_fs):
 
     return install_grub(partition_fs)
 
-def install_lumi(partition_fs):
-    partition = get_partition(partition_fs)
-    partition_status = Path(partition['mountpoint'] + '/lumi.json')
-
-    if not partition_status.exists():
-        install_grub(partition_fs)
-    else:
-        update_grub(partition_fs)
-
-    install_grub_theme(partition_fs)
-
-def install_grub_theme(partition_fs):
+def install_theme(partition_fs):
     pass
 

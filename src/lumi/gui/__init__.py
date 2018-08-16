@@ -1,1 +1,1 @@
-from .setup import main
+from .gui import main

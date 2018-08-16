@@ -10,7 +10,10 @@ setup(
     packages = find_packages('src'),
     package_dir={'': 'src'},
     entry_points={
-        'console_scripts': ['lumi-cli=lumi.gui:main'],
+        'console_scripts': [
+            'lumi-gui=lumi.gui:main',
+            'lumi=lumi.cli:main'
+                            ],
     }
 )
 

@@ -1,5 +1,6 @@
-from .parser import parse_args
-from .dispatcher import dispatch
+from . import parser
+from . import dispatcher
 
-def call_cli():
-    dispatch(parse_args())
+def main():
+    dispatcher.dispatch(parser.parse_args())
+

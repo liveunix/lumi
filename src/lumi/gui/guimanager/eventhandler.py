@@ -17,15 +17,22 @@ class GUIEventHandler():
     def _get_callback_class_by_module_and_name(self, module, function_name):
         return getattr(module, function_name)
 
+    def _get_absolute_module_path_from_relative_one(self, relative_module_path):
+        return 'lumi.gui.' + relative_module_path
+
     def _split_path_into_module_and_function(self, callback_path):
         """@return : a dict with 'module' and 'class_name' indexes.
            example: callbacks.example_callbacks.callback_class
                     {'module': callbacks.example_callbacks,
                     'class_name': callback_class}
         """
+        relative_module_path = '.'.join(callback_path.split('.')[:-1])
+        absolute_module_path = self._get_absolute_module_path_from_relative_one(relative_module_path)
+        class_name = callback_path.split('.')[-1]
+
         return {
-            'module': '.'.join(callback_path.split('.')[:-1]),
-            'class_name': callback_path.split('.')[-1]
+            'module': absolute_module_path,
+            'class_name': class_name
         }
 
 

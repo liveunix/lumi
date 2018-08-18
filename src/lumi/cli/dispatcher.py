@@ -1,4 +1,4 @@
-from . import actions
+from lumi.cli import actions
 
 def dispatch(action, callback=None):
     if action is None:

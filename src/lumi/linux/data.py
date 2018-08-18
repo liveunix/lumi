@@ -46,7 +46,7 @@ def get_distro_list(base_dir=BASE_DIR):
     data = Path(base_dir + 'distro').glob('*/*.yaml')
     distro_list = []
     for d in data:
-
+        pass
     return distro_list
 
 def initialize(mountpoint):

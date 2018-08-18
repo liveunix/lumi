@@ -1,5 +1,4 @@
-from ..linux import data
+from lumi.linux import data
 
 def dispatch(action):
     data.sync()
-    pass

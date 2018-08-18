@@ -18,6 +18,7 @@ class GUIEventHandler():
         return getattr(module, function_name)
 
     def _get_absolute_module_path_from_relative_one(self, relative_module_path):
+        # TODO: code a system to automatically find upper package, now, it's hardcoded
         return 'lumi.gui.' + relative_module_path
 
     def _split_path_into_module_and_function(self, callback_path):

@@ -6,7 +6,12 @@ def dispatch(action, callback=None):
 
     """Invoke the right callback for the given action"""
     if callback is None:
-        module = getattr(actions, action.command)
+        try:
+            module = getattr(actions, action.command)
+        except:
+            print("Type lumi -h to see the commands available")
+            return
+
         callback = getattr(module, 'dispatch', lambda action: False)
 
     return callback(action)

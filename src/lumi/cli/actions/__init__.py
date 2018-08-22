@@ -6,3 +6,4 @@ from . import list_all
 from . import list
 from . import sync
 from . import version
+from . import help

@@ -1,5 +1,11 @@
 SUBCOMMANDS = [
     {
+        'command': 'help',
+        'require_options': False,
+        'description': '',
+        'arguments': [],
+    },
+    {
         'command': 'install',
         'description': 'Install LUMI on a device',
         'arguments': [

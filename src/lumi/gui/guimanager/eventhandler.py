@@ -1,5 +1,4 @@
 from functools import partial
-from PyQt5.QtCore import pyqtSignal as EVENT
 
 from importlib import import_module
 

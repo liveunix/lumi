@@ -1,11 +1,13 @@
 certifi==2018.4.16
 chardet==3.0.4
 idna==2.7
+pretty-bad-protocol==3.1.1
+psutil==5.4.7
+PyQt5==5.11.2
+PyQt5-sip==4.19.12
 pyxdg==0.26
+PyYAML==3.13
 requests==2.19.1
 sh==1.12.14
 urllib3==1.23
 xdg==3.0.2
-pretty-bad-protocol>=3.0.0
-PyQt5==5.11.2
-PyQt5-sip==4.19.12

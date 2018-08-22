@@ -46,6 +46,7 @@ class GUIEventHandler():
 
             for callback_class_path in callbacks_paths_list:
                 path_info = self._split_path_into_module_and_function(callback_class_path)
+
                 module = self._get_module_object_by_path(path_info['module'])
                 callback_class = self._get_callback_class_by_module_and_name(module, path_info['class_name'])
 

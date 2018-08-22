@@ -162,7 +162,6 @@ class Ui_Dialog(object):
             self.install_available_distros_pushButton.setEnabled(True)
             self.install_available_distros_pushButton.setObjectName("install_available_distros_pushButton_%d" % index)
             self.verticalLayout_5.addWidget(self.install_available_distros_pushButton)
-            #self.install_available_distros_pushButton.clicked.connect(lambda print: print('ok'))
 
             # create and set a 'available_stage3_files_label' label to vertical layout with index 5
             self.available_stage3_files_label = QtWidgets.QLabel(self.available_distro_list_frame)

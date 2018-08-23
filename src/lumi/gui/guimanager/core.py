@@ -237,7 +237,7 @@ class Ui_Dialog(object):
             self.tabWidget.setTabText(index, _translate("Dialog", tabname))
             self.tabWidget.setCurrentIndex(index)
         
-
+    """
     def retranslate_ui_dialog(self):
         self.setWindowTitle(_translate("Dialog", "Dialog"))
         self.installed_distro_list_label.setText(_translate("Dialog", "I&nstalled distros"))
@@ -277,3 +277,4 @@ class Ui_Dialog(object):
 "</style></head><body style=\" font-family:\'Noto Sans\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Something Dom will write too lazy for lorem ipsum so bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla  bla </p></body></html>"))
 
+    """

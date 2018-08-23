@@ -15,7 +15,7 @@ class ApplicationWindow(QtWidgets.QWidget, Ui_Dialog, GUIEventHandler):
         for index, tabname in enumerate(['tab', 'tabddd']):
             self.setup_tab_structure_with_index_and_name(index, tabname)
         self.set_buddies()   
-        self.retranslate_ui_dialog()
+        #self.retranslate_ui_dialog()
 
     def __init__(self):
         self._construct_qapplication()

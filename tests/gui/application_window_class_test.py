@@ -1,4 +1,4 @@
-from lumi.gui.guimanager.init import ApplicationWindow
+from lumi.gui.guimanager.core import ApplicationWindow
 
 class TestApplicationWindow(ApplicationWindow):
 

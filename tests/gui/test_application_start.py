@@ -30,7 +30,7 @@ class TestAppStartCorrectly(unittest.TestCase):
     def test_callbacks_are_triggered_by_event(self):
         with self.assertRaises(SystemExit):
             self.build_app()
-            self.spawn_thread_to_close_app_after_seconds(1)
+            self.spawn_thread_to_close_app_after_seconds(0.1)
             self.start_closing_gui()
             self.run_gui()
 

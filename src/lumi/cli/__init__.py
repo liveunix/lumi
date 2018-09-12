@@ -1,1 +1,1 @@
-from .command_line import main
+from lumi.cli.command_line import main

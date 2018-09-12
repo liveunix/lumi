@@ -1,19 +1,25 @@
 import yaml
+from lumi.core.action import *
+from lumi.core.statushandler import *
 from pathlib import Path
 from sh.contrib import git
 from xdg.BaseDirectory import xdg_data_home
+from io import StringIO
 
 BASE_DIR = xdg_data_home + '/lumi/'
 DISTRO_REPO_URL = 'https://github.com/liveunix/liveunix-data.git'
 GRUB_REPO_URL = 'https://github.com/liveunix/lumi-grub.git'
 
-def sync_repo(uri, dir):
+
+def sync_repo(uri, dir, buf):
     """Synchronize a single repository"""
     repo_exists = Path(dir).exists()
 
     if repo_exists is False:
-        return git.clone(uri, dir)
-    git.pull('origin', 'master', rebase=True, _cwd=dir)
+        return git.clone(uri, dir, _bg=True, _out=buf)
+
+    return git.pull('origin', 'master', rebase=True, _bg=True, _cwd=dir)
+
 
 def sync(base_dir=BASE_DIR):
     """Synchronize the LUMI repositories.
@@ -24,8 +30,12 @@ def sync(base_dir=BASE_DIR):
     GRUB_DIR = base_dir + 'grub'
     DISTRO_DIR = base_dir + 'distro'
 
-    sync_repo(GRUB_REPO_URL, GRUB_DIR)
-    sync_repo(DISTRO_REPO_URL, DISTRO_DIR)
+    buf = StringIO()
+    StatusHandler.push(CommandAction('sync_grub_repo', sync_repo(GRUB_REPO_URL, GRUB_DIR, buf), buf))
+
+    buf = StringIO()
+    StatusHandler.push(CommandAction('sync_distro_repo', sync_repo(DISTRO_REPO_URL, DISTRO_DIR, buf), buf))
+
 
 def get_distro_info(name_id='', base_dir=BASE_DIR):
     data = Path(base_dir + 'distro').glob('*/*.yaml')
@@ -42,6 +52,7 @@ def get_distro_info(name_id='', base_dir=BASE_DIR):
 
     return distro_list
 
+
 def get_distro_list(base_dir=BASE_DIR):
     data = Path(base_dir + 'distro').glob('*/*.yaml')
     distro_list = []
@@ -49,6 +60,6 @@ def get_distro_list(base_dir=BASE_DIR):
         pass
     return distro_list
 
+
 def initialize(mountpoint):
     pass
-

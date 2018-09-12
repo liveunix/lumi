@@ -17,14 +17,13 @@ SUBCOMMANDS = [
         ],
     },
     {
-        'command': 'inspect',
-        'require_options': False,
-        'description': 'Inspect device and print information',
+        'command': 'search',
+        'description': 'List all the systems that match the query',
         'arguments': [
             {
-                'name': 'device',
+                'name': 'query',
                 'type': str,
-                'help': 'The device to inspect (e.g. /dev/sdb)',
+                'help': 'Query to match against all avaiable systems',
             },
         ],
     },
@@ -44,10 +43,9 @@ SUBCOMMANDS = [
         'description': 'List all the versions for a given distro or stage3',
         'arguments': [
             {
-                'name': 'name',
+                'name': 'device',
                 'type': str,
-                'help': 'The distro or stage3 name (e.g. antergos)',
-                'required': False,
+                'help': 'The device to get information from',
             },
         ],
     },

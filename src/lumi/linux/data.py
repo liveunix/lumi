@@ -1,10 +1,10 @@
 import yaml
 from lumi.core.action import *
 from lumi.core.statushandler import *
+from lumi.core.buffer import g_buf
 from pathlib import Path
 from sh.contrib import git
 from xdg.BaseDirectory import xdg_data_home
-from io import StringIO
 
 BASE_DIR = xdg_data_home + '/lumi/'
 DISTRO_REPO_URL = 'https://github.com/liveunix/liveunix-data.git'
@@ -16,9 +16,13 @@ def sync_repo(uri, dir, buf):
     repo_exists = Path(dir).exists()
 
     if repo_exists is False:
-        return git.clone(uri, dir, _bg=True, _out=buf)
+        g_buf().write("Cloning the repository {}.\n".format(uri))
+        g_buf().flush()
+        return git.clone(uri, dir, _out=buf)
 
-    return git.pull('origin', 'master', rebase=True, _bg=True, _cwd=dir)
+    g_buf().write("Updating the repository {} to the latest commit.\n".format(uri))
+    g_buf().flush()
+    return git.pull('origin', 'master', _cwd=dir, _out=buf)
 
 
 def sync(base_dir=BASE_DIR):
@@ -30,11 +34,9 @@ def sync(base_dir=BASE_DIR):
     GRUB_DIR = base_dir + 'grub'
     DISTRO_DIR = base_dir + 'distro'
 
-    buf = StringIO()
-    StatusHandler.push(CommandAction('sync_grub_repo', sync_repo(GRUB_REPO_URL, GRUB_DIR, buf), buf))
+    sync_repo(GRUB_REPO_URL, GRUB_DIR, g_buf())
 
-    buf = StringIO()
-    StatusHandler.push(CommandAction('sync_distro_repo', sync_repo(DISTRO_REPO_URL, DISTRO_DIR, buf), buf))
+    sync_repo(DISTRO_REPO_URL, DISTRO_DIR, g_buf())
 
 
 def get_distro_info(name_id='', base_dir=BASE_DIR):

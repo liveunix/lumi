@@ -1,4 +1,4 @@
-import yaml
+import strictyaml
 from lumi.core.action import *
 from lumi.core.statushandler import *
 from lumi.core.buffer import g_buf
@@ -49,7 +49,7 @@ def get_distro_info(name_id="", base_dir=BASE_DIR):
     distro_list = []
     for d in data:
         with open(d, "r") as stream:
-            distro = yaml.load(stream)
+            distro = strictyaml.load(stream)
             distro_list.append({"id": d.stem, "distro": distro})
 
     if name_id != "":

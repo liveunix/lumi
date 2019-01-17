@@ -2,12 +2,12 @@ from functools import partial
 
 from importlib import import_module
 
-class GUIEventHandler():
 
+class GUIEventHandler:
     def _get_gui_object_by_name(self, object_name):
         return getattr(self, object_name)
 
-    def _get_object_event_attribute_by_name(self,gui_object ,trigger_event):
+    def _get_object_event_attribute_by_name(self, gui_object, trigger_event):
         return getattr(gui_object, trigger_event)
 
     def _get_module_object_by_path(self, module_path):
@@ -18,7 +18,7 @@ class GUIEventHandler():
 
     def _get_absolute_module_path_from_relative_one(self, relative_module_path):
         # TODO: code a system to automatically find upper package, now, it's hardcoded
-        return 'lumi.gui.' + relative_module_path
+        return "lumi.gui." + relative_module_path
 
     def _split_path_into_module_and_function(self, callback_path):
         """@return : a dict with 'module' and 'class_name' indexes.
@@ -26,28 +26,30 @@ class GUIEventHandler():
                     {'module': callbacks.example_callbacks,
                     'class_name': callback_class}
         """
-        relative_module_path = '.'.join(callback_path.split('.')[:-1])
-        absolute_module_path = self._get_absolute_module_path_from_relative_one(relative_module_path)
-        class_name = callback_path.split('.')[-1]
+        relative_module_path = ".".join(callback_path.split(".")[:-1])
+        absolute_module_path = self._get_absolute_module_path_from_relative_one(
+            relative_module_path
+        )
+        class_name = callback_path.split(".")[-1]
 
-        return {
-            'module': absolute_module_path,
-            'class_name': class_name
-        }
-
+        return {"module": absolute_module_path, "class_name": class_name}
 
     def route_callbacks_to_objects(self, routing_options):
         for object_name in routing_options:
-            trigger_event = routing_options[object_name]['trigger_event']
-            callbacks_paths_list = routing_options[object_name]['callback_functions']
+            trigger_event = routing_options[object_name]["trigger_event"]
+            callbacks_paths_list = routing_options[object_name]["callback_functions"]
 
             gui_object = self._get_gui_object_by_name(object_name)
             event = self._get_object_event_attribute_by_name(gui_object, trigger_event)
 
             for callback_class_path in callbacks_paths_list:
-                path_info = self._split_path_into_module_and_function(callback_class_path)
+                path_info = self._split_path_into_module_and_function(
+                    callback_class_path
+                )
 
-                module = self._get_module_object_by_path(path_info['module'])
-                callback_class = self._get_callback_class_by_module_and_name(module, path_info['class_name'])
+                module = self._get_module_object_by_path(path_info["module"])
+                callback_class = self._get_callback_class_by_module_and_name(
+                    module, path_info["class_name"]
+                )
 
                 event.connect(partial(callback_class.init(self)))

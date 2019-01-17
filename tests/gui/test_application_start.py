@@ -4,6 +4,7 @@ import unittest
 import threading
 import time
 
+
 class TestAppStartCorrectly(unittest.TestCase):
     """this test will check if no exceptions are thrown while gui launching.
     It tests also if a SystemExit is called (true, in fact a thread will be spawned
@@ -17,10 +18,10 @@ class TestAppStartCorrectly(unittest.TestCase):
 
     def start_closing_gui(self):
         self.thread.start()
-    
+
     def build_app(self):
         self.app = TestApplicationWindow()
-    
+
     def spawn_thread_to_close_app_after_seconds(self, seconds):
         self.thread = threading.Thread(target=self.close_gui_operation, args=(seconds,))
 
@@ -34,5 +35,6 @@ class TestAppStartCorrectly(unittest.TestCase):
             self.start_closing_gui()
             self.run_gui()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

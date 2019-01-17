@@ -3,8 +3,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 _translate = QtCore.QCoreApplication.translate
-class Ui_Dialog(object):
 
+
+class Ui_Dialog(object):
     def setup_ui_dialog(self):
         # initializing Dialog window
         self.setObjectName("Dialog")
@@ -38,11 +39,11 @@ class Ui_Dialog(object):
         self.available_distro_list_label.setBuddy(self.available_distros_listWidget)
         self.available_stage3_files_label.setBuddy(self.available_stage3_listWidget)
         self.distro_description_label.setBuddy(self.distro_description_textBrowser)
-            
+
         self.tabWidget.setCurrentIndex(1)
         self.available_distros_listWidget.setCurrentRow(-1)
         QtCore.QMetaObject.connectSlotsByName(self)
-        
+
         # add horizontal layout with index 5 to the 'gridLayout' gridLayout
         self.gridLayout.addLayout(self.horizontalLayout_5, 0, 0, 1, 1)
 
@@ -53,190 +54,246 @@ class Ui_Dialog(object):
         self.verticalLayout_2.addWidget(self.tabWidget)
 
     def setup_tab_structure_with_index_and_name(self, index, tabname):
-            # create a tab named 'tab'
-            self.tab = QtWidgets.QWidget()
-            self.tab.setObjectName(tabname)
+        # create a tab named 'tab'
+        self.tab = QtWidgets.QWidget()
+        self.tab.setObjectName(tabname)
 
-            # create a vertical layout with index 3 in tab
-            self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.tab)
-            self.verticalLayout_3.setObjectName("verticalLayout_3")
+        # create a vertical layout with index 3 in tab
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.tab)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
 
-            # create a frame wrapping lists and distro description with name 'lists_and_distro_description_frame'
-            self.lists_and_distro_description_frame = QtWidgets.QFrame(self.tab)
-            self.lists_and_distro_description_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
-            self.lists_and_distro_description_frame.setFrameShadow(QtWidgets.QFrame.Raised)
-            self.lists_and_distro_description_frame.setObjectName("lists_and_distro_description_frame")
-            
-            # create an horizontal layout in the 'lists_and_distro_description_frame' frame with index 2
-            self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.lists_and_distro_description_frame)
-            self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-            
-            # set a frame wrapping the installed distro list with name 'installed_distro_list_frame'
-            self.installed_distro_list_frame = QtWidgets.QFrame(self.lists_and_distro_description_frame)
-            self.installed_distro_list_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
-            self.installed_distro_list_frame.setFrameShadow(QtWidgets.QFrame.Raised)
-            self.installed_distro_list_frame.setObjectName("installed_distro_list_frame")
+        # create a frame wrapping lists and distro description with name 'lists_and_distro_description_frame'
+        self.lists_and_distro_description_frame = QtWidgets.QFrame(self.tab)
+        self.lists_and_distro_description_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.lists_and_distro_description_frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.lists_and_distro_description_frame.setObjectName(
+            "lists_and_distro_description_frame"
+        )
 
-            # create and set a vertical with index 7 layout to the 'installed_distro_list_frame' frame
-            self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.installed_distro_list_frame)
-            self.verticalLayout_7.setObjectName("verticalLayout_7")
+        # create an horizontal layout in the 'lists_and_distro_description_frame' frame with index 2
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(
+            self.lists_and_distro_description_frame
+        )
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
-            # create and set a label for in 'installed_distro_list_frame' 
-            self.installed_distro_list_label = QtWidgets.QLabel(self.installed_distro_list_frame)
-            self.installed_distro_list_label.setObjectName("installed_distro_list_label")
-            self.verticalLayout_7.addWidget(self.installed_distro_list_label)
+        # set a frame wrapping the installed distro list with name 'installed_distro_list_frame'
+        self.installed_distro_list_frame = QtWidgets.QFrame(
+            self.lists_and_distro_description_frame
+        )
+        self.installed_distro_list_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.installed_distro_list_frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.installed_distro_list_frame.setObjectName("installed_distro_list_frame")
 
-            # create and set a listWidget (for installed distros) in installed_distro_list_frame
-            self.installed_distros_listWidget = QtWidgets.QListWidget(self.installed_distro_list_frame)
-            self.installed_distros_listWidget.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
-            self.installed_distros_listWidget.setObjectName("installed_distros_listWidget_%d" % index)
+        # create and set a vertical with index 7 layout to the 'installed_distro_list_frame' frame
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.installed_distro_list_frame)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
 
-            # create and set an item fon the installed distros listWidget
-            item = QtWidgets.QListWidgetItem()
-            self.installed_distros_listWidget.addItem(item)
-            
-            # add to vertical layout 7 the installed distros listWidget widget
-            self.verticalLayout_7.addWidget(self.installed_distros_listWidget)
-            
-            # create and set push button to uninstall the installed distros to vertical layout 7
-            self.uninstall_installed_distros_pushButton = QtWidgets.QPushButton(self.installed_distro_list_frame)
-            self.uninstall_installed_distros_pushButton.setEnabled(True)
-            self.uninstall_installed_distros_pushButton.setObjectName("uninstall_installed_distros_pushButton_%d" % index)
-            self.verticalLayout_7.addWidget(self.uninstall_installed_distros_pushButton)
-            
-            # create and set installed stage3 files label to vertical layout 7
-            self.installed_stage3_files_label = QtWidgets.QLabel(self.installed_distro_list_frame)
-            self.installed_stage3_files_label.setObjectName("installed_stage3_files_label")
-            self.verticalLayout_7.addWidget(self.installed_stage3_files_label)
+        # create and set a label for in 'installed_distro_list_frame'
+        self.installed_distro_list_label = QtWidgets.QLabel(
+            self.installed_distro_list_frame
+        )
+        self.installed_distro_list_label.setObjectName("installed_distro_list_label")
+        self.verticalLayout_7.addWidget(self.installed_distro_list_label)
 
-            # create an installed stage3 files listWidget widget
-            self.installed_stage3_listWidget = QtWidgets.QListWidget(self.installed_distro_list_frame)
-            self.installed_stage3_listWidget.setObjectName("installed_stage3_listWidget_%d" % index)
+        # create and set a listWidget (for installed distros) in installed_distro_list_frame
+        self.installed_distros_listWidget = QtWidgets.QListWidget(
+            self.installed_distro_list_frame
+        )
+        self.installed_distros_listWidget.setSelectionMode(
+            QtWidgets.QAbstractItemView.NoSelection
+        )
+        self.installed_distros_listWidget.setObjectName(
+            "installed_distros_listWidget_%d" % index
+        )
 
-            # create and set an item to installed stage3 files listWidget widget
-            item = QtWidgets.QListWidgetItem()
-            self.installed_stage3_listWidget.addItem(item)
+        # create and set an item fon the installed distros listWidget
+        item = QtWidgets.QListWidgetItem()
+        self.installed_distros_listWidget.addItem(item)
 
-            # set installed stage3 files listWidget widget to vertical layout 7
-            self.verticalLayout_7.addWidget(self.installed_stage3_listWidget)
-            
-            # create and set an uninstall installed stage3 pushButtom widget to vertiacal layout 7
-            self.uninstall_installed_stage3_pushButton = QtWidgets.QPushButton(self.installed_distro_list_frame)
-            self.uninstall_installed_stage3_pushButton.setObjectName("uninstall_installed_stage3_pushButton_%d" % index)
+        # add to vertical layout 7 the installed distros listWidget widget
+        self.verticalLayout_7.addWidget(self.installed_distros_listWidget)
 
-            self.verticalLayout_7.addWidget(self.uninstall_installed_stage3_pushButton)
-            
-            # set 'installed_distro_list_frame' frame to horizontal layout with index 2
-            self.horizontalLayout_2.addWidget(self.installed_distro_list_frame)
+        # create and set push button to uninstall the installed distros to vertical layout 7
+        self.uninstall_installed_distros_pushButton = QtWidgets.QPushButton(
+            self.installed_distro_list_frame
+        )
+        self.uninstall_installed_distros_pushButton.setEnabled(True)
+        self.uninstall_installed_distros_pushButton.setObjectName(
+            "uninstall_installed_distros_pushButton_%d" % index
+        )
+        self.verticalLayout_7.addWidget(self.uninstall_installed_distros_pushButton)
 
-            # create a 'available_distro_list_frame' frame 
-            self.available_distro_list_frame = QtWidgets.QFrame(self.lists_and_distro_description_frame)
-            self.available_distro_list_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
-            self.available_distro_list_frame.setFrameShadow(QtWidgets.QFrame.Raised)
-            self.available_distro_list_frame.setObjectName("available_distro_list_frame")
+        # create and set installed stage3 files label to vertical layout 7
+        self.installed_stage3_files_label = QtWidgets.QLabel(
+            self.installed_distro_list_frame
+        )
+        self.installed_stage3_files_label.setObjectName("installed_stage3_files_label")
+        self.verticalLayout_7.addWidget(self.installed_stage3_files_label)
 
-            # set a vertical layout with index 5 to 'available_distro_list_frame' frame
-            self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.available_distro_list_frame)
-            self.verticalLayout_5.setObjectName("verticalLayout_5")
+        # create an installed stage3 files listWidget widget
+        self.installed_stage3_listWidget = QtWidgets.QListWidget(
+            self.installed_distro_list_frame
+        )
+        self.installed_stage3_listWidget.setObjectName(
+            "installed_stage3_listWidget_%d" % index
+        )
 
-            # create and set a 'available_distro_list_label' label to vertical layout with index 5
-            self.available_distro_list_label = QtWidgets.QLabel(self.available_distro_list_frame)
-            self.available_distro_list_label.setObjectName("available_distro_list_label")
-            self.verticalLayout_5.addWidget(self.available_distro_list_label)
+        # create and set an item to installed stage3 files listWidget widget
+        item = QtWidgets.QListWidgetItem()
+        self.installed_stage3_listWidget.addItem(item)
 
-            # create a 'available_distros_listWidget' listWidget 
-            self.available_distros_listWidget = QtWidgets.QListWidget(self.available_distro_list_frame)
-            self.available_distros_listWidget.setObjectName("available_distros_listWidget_%d" % index)
+        # set installed stage3 files listWidget widget to vertical layout 7
+        self.verticalLayout_7.addWidget(self.installed_stage3_listWidget)
 
-            # create and set an Item for 'available_distros_listWidget' istWidget
-            item = QtWidgets.QListWidgetItem()
-            self.available_distros_listWidget.addItem(item)
-            item = QtWidgets.QListWidgetItem()
-            self.available_distros_listWidget.addItem(item)
+        # create and set an uninstall installed stage3 pushButtom widget to vertiacal layout 7
+        self.uninstall_installed_stage3_pushButton = QtWidgets.QPushButton(
+            self.installed_distro_list_frame
+        )
+        self.uninstall_installed_stage3_pushButton.setObjectName(
+            "uninstall_installed_stage3_pushButton_%d" % index
+        )
 
-            # add 'available_distros_listWidget' listWidget to vertical layout with index 5
-            self.verticalLayout_5.addWidget(self.available_distros_listWidget)
+        self.verticalLayout_7.addWidget(self.uninstall_installed_stage3_pushButton)
 
-            #create and set a 'install_available_distros_pushButton' pushButton to vertical layout with index 5
-            self.install_available_distros_pushButton = QtWidgets.QPushButton(self.available_distro_list_frame)
-            self.install_available_distros_pushButton.setEnabled(True)
-            self.install_available_distros_pushButton.setObjectName("install_available_distros_pushButton_%d" % index)
-            self.verticalLayout_5.addWidget(self.install_available_distros_pushButton)
+        # set 'installed_distro_list_frame' frame to horizontal layout with index 2
+        self.horizontalLayout_2.addWidget(self.installed_distro_list_frame)
 
-            # create and set a 'available_stage3_files_label' label to vertical layout with index 5
-            self.available_stage3_files_label = QtWidgets.QLabel(self.available_distro_list_frame)
-            self.available_stage3_files_label.setObjectName("available_stage3_files_label")
-            self.verticalLayout_5.addWidget(self.available_stage3_files_label)
+        # create a 'available_distro_list_frame' frame
+        self.available_distro_list_frame = QtWidgets.QFrame(
+            self.lists_and_distro_description_frame
+        )
+        self.available_distro_list_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.available_distro_list_frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.available_distro_list_frame.setObjectName("available_distro_list_frame")
 
-            # create a 'available_stage3_listWidget' listWidget
-            self.available_stage3_listWidget = QtWidgets.QListWidget(self.available_distro_list_frame)
-            self.available_stage3_listWidget.setObjectName("available_stage3_listWidget_%d" % index)
+        # set a vertical layout with index 5 to 'available_distro_list_frame' frame
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.available_distro_list_frame)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
 
-            # create and set a 'available_stage3_listWidget' listWidget's item to vertical layout with index 5
-            item = QtWidgets.QListWidgetItem()
-            self.available_stage3_listWidget.addItem(item)
-            self.verticalLayout_5.addWidget(self.available_stage3_listWidget)
+        # create and set a 'available_distro_list_label' label to vertical layout with index 5
+        self.available_distro_list_label = QtWidgets.QLabel(
+            self.available_distro_list_frame
+        )
+        self.available_distro_list_label.setObjectName("available_distro_list_label")
+        self.verticalLayout_5.addWidget(self.available_distro_list_label)
 
-            # create and set a 'install_available_stage3_pushButton' pushButton to vertical layout with index 5
-            self.install_available_stage3_pushButton = QtWidgets.QPushButton(self.available_distro_list_frame)
-            self.install_available_stage3_pushButton.setEnabled(True)
-            self.install_available_stage3_pushButton.setObjectName("install_available_stage3_pushButton_%d" % index)
-            self.verticalLayout_5.addWidget(self.install_available_stage3_pushButton)
+        # create a 'available_distros_listWidget' listWidget
+        self.available_distros_listWidget = QtWidgets.QListWidget(
+            self.available_distro_list_frame
+        )
+        self.available_distros_listWidget.setObjectName(
+            "available_distros_listWidget_%d" % index
+        )
 
-            # add 'available_distro_list_frame' frame to horizontal layout with index 2
-            self.horizontalLayout_2.addWidget(self.available_distro_list_frame)
+        # create and set an Item for 'available_distros_listWidget' istWidget
+        item = QtWidgets.QListWidgetItem()
+        self.available_distros_listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.available_distros_listWidget.addItem(item)
 
-            # create a 'distro_description_frame' frame
-            self.distro_description_frame = QtWidgets.QFrame(self.lists_and_distro_description_frame)
-            self.distro_description_frame.setEnabled(True)
-            self.distro_description_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
-            self.distro_description_frame.setFrameShadow(QtWidgets.QFrame.Raised)
-            self.distro_description_frame.setObjectName("distro_description_frame")
+        # add 'available_distros_listWidget' listWidget to vertical layout with index 5
+        self.verticalLayout_5.addWidget(self.available_distros_listWidget)
 
-            # create a vertical layout with index 6
-            self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.distro_description_frame)
-            self.verticalLayout_6.setObjectName("verticalLayout_6")
+        # create and set a 'install_available_distros_pushButton' pushButton to vertical layout with index 5
+        self.install_available_distros_pushButton = QtWidgets.QPushButton(
+            self.available_distro_list_frame
+        )
+        self.install_available_distros_pushButton.setEnabled(True)
+        self.install_available_distros_pushButton.setObjectName(
+            "install_available_distros_pushButton_%d" % index
+        )
+        self.verticalLayout_5.addWidget(self.install_available_distros_pushButton)
 
-            # create and set a 'distro_description_label' label to vertical layout with index 6
-            self.distro_description_label = QtWidgets.QLabel(self.distro_description_frame)
-            self.distro_description_label.setObjectName("distro_description_label")
-            self.verticalLayout_6.addWidget(self.distro_description_label)
+        # create and set a 'available_stage3_files_label' label to vertical layout with index 5
+        self.available_stage3_files_label = QtWidgets.QLabel(
+            self.available_distro_list_frame
+        )
+        self.available_stage3_files_label.setObjectName("available_stage3_files_label")
+        self.verticalLayout_5.addWidget(self.available_stage3_files_label)
 
-            # create and set a 'distro_description_textBrowser' textBrowser to vertical layout with index 6
-            self.distro_description_textBrowser = QtWidgets.QTextBrowser(self.distro_description_frame)
-            self.distro_description_textBrowser.setMinimumSize(QtCore.QSize(200, 0))
-            self.distro_description_textBrowser.setObjectName("distro_description_textBrowser_%d" % index)
-            self.verticalLayout_6.addWidget(self.distro_description_textBrowser)
+        # create a 'available_stage3_listWidget' listWidget
+        self.available_stage3_listWidget = QtWidgets.QListWidget(
+            self.available_distro_list_frame
+        )
+        self.available_stage3_listWidget.setObjectName(
+            "available_stage3_listWidget_%d" % index
+        )
 
-            # add 'distro_description_frame' frame to horizontal layout with index 2
-            self.horizontalLayout_2.addWidget(self.distro_description_frame)
+        # create and set a 'available_stage3_listWidget' listWidget's item to vertical layout with index 5
+        item = QtWidgets.QListWidgetItem()
+        self.available_stage3_listWidget.addItem(item)
+        self.verticalLayout_5.addWidget(self.available_stage3_listWidget)
 
-            # add 'lists_and_distro_description_frame' frame to vertical layout with index 3
-            self.verticalLayout_3.addWidget(self.lists_and_distro_description_frame)
+        # create and set a 'install_available_stage3_pushButton' pushButton to vertical layout with index 5
+        self.install_available_stage3_pushButton = QtWidgets.QPushButton(
+            self.available_distro_list_frame
+        )
+        self.install_available_stage3_pushButton.setEnabled(True)
+        self.install_available_stage3_pushButton.setObjectName(
+            "install_available_stage3_pushButton_%d" % index
+        )
+        self.verticalLayout_5.addWidget(self.install_available_stage3_pushButton)
 
-            # create an horizontal layout with index 0
-            self.horizontalLayout = QtWidgets.QHBoxLayout()
-            self.horizontalLayout.setObjectName("horizontalLayout")
+        # add 'available_distro_list_frame' frame to horizontal layout with index 2
+        self.horizontalLayout_2.addWidget(self.available_distro_list_frame)
 
-            # create a 'progressBar' progressBar
-            self.progressBar = QtWidgets.QProgressBar(self.tab)
-            self.progressBar.setAutoFillBackground(False)
-            self.progressBar.setRange(0, 100)
-            self.progressBar.setProperty("value", 12)
-            self.progressBar.setInvertedAppearance(True)
-            self.progressBar.setObjectName("progressBar_%d" % index)
+        # create a 'distro_description_frame' frame
+        self.distro_description_frame = QtWidgets.QFrame(
+            self.lists_and_distro_description_frame
+        )
+        self.distro_description_frame.setEnabled(True)
+        self.distro_description_frame.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.distro_description_frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.distro_description_frame.setObjectName("distro_description_frame")
 
-            # add 'progressBar' progressBar widget to horizontl layout with index 0
-            self.horizontalLayout.addWidget(self.progressBar)
+        # create a vertical layout with index 6
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.distro_description_frame)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
 
-            #add horizontal layout with index 0 to vertical layout with index 3
-            self.verticalLayout_3.addLayout(self.horizontalLayout)
-            
-            # add 'tab' tab to tabWidget
-            self.tabWidget.addTab(self.tab, tabname)
-            self.tabWidget.setTabText(index, _translate("Dialog", tabname))
-            self.tabWidget.setCurrentIndex(index)
-        
+        # create and set a 'distro_description_label' label to vertical layout with index 6
+        self.distro_description_label = QtWidgets.QLabel(self.distro_description_frame)
+        self.distro_description_label.setObjectName("distro_description_label")
+        self.verticalLayout_6.addWidget(self.distro_description_label)
+
+        # create and set a 'distro_description_textBrowser' textBrowser to vertical layout with index 6
+        self.distro_description_textBrowser = QtWidgets.QTextBrowser(
+            self.distro_description_frame
+        )
+        self.distro_description_textBrowser.setMinimumSize(QtCore.QSize(200, 0))
+        self.distro_description_textBrowser.setObjectName(
+            "distro_description_textBrowser_%d" % index
+        )
+        self.verticalLayout_6.addWidget(self.distro_description_textBrowser)
+
+        # add 'distro_description_frame' frame to horizontal layout with index 2
+        self.horizontalLayout_2.addWidget(self.distro_description_frame)
+
+        # add 'lists_and_distro_description_frame' frame to vertical layout with index 3
+        self.verticalLayout_3.addWidget(self.lists_and_distro_description_frame)
+
+        # create an horizontal layout with index 0
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+
+        # create a 'progressBar' progressBar
+        self.progressBar = QtWidgets.QProgressBar(self.tab)
+        self.progressBar.setAutoFillBackground(False)
+        self.progressBar.setRange(0, 100)
+        self.progressBar.setProperty("value", 12)
+        self.progressBar.setInvertedAppearance(True)
+        self.progressBar.setObjectName("progressBar_%d" % index)
+
+        # add 'progressBar' progressBar widget to horizontl layout with index 0
+        self.horizontalLayout.addWidget(self.progressBar)
+
+        # add horizontal layout with index 0 to vertical layout with index 3
+        self.verticalLayout_3.addLayout(self.horizontalLayout)
+
+        # add 'tab' tab to tabWidget
+        self.tabWidget.addTab(self.tab, tabname)
+        self.tabWidget.setTabText(index, _translate("Dialog", tabname))
+        self.tabWidget.setCurrentIndex(index)
+
     """
     def retranslate_ui_dialog(self):
         self.setWindowTitle(_translate("Dialog", "Dialog"))

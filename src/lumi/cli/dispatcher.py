@@ -13,6 +13,6 @@ def dispatch(action, callback=None):
             print("Type lumi -h to see the commands available")
             return
 
-        callback = getattr(module, 'dispatch', lambda action: False)
+        callback = getattr(module, "dispatch", lambda action: False)
 
     return callback(action)

@@ -2,7 +2,8 @@ import io
 import sys
 
 g_buffer = sys.stdout = sys.__stdout__ = io.TextIOWrapper(
-    sys.stdout.detach(), encoding=sys.stdout.encoding, line_buffering=True)
+    sys.stdout.detach(), encoding=sys.stdout.encoding, line_buffering=True
+)
 
 
 def g_buf():
@@ -15,4 +16,5 @@ def write_to_stdout():
         sys.stdout.detach(),
         encoding=sys.stdout.encoding,
         line_buffering=True,
-        write_through=True)
+        write_through=True,
+    )

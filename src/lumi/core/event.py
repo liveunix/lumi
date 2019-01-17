@@ -1,5 +1,6 @@
 from lumi.core.observer import Observer
 
+
 class Event:
     def __init__(self, name, data=None):
         self.name = name

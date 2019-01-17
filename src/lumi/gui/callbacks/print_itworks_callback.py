@@ -5,8 +5,8 @@ class it_works:
     @classmethod
     def init(cls, application):
         istance = cls(application)
-    
+
         return istance.main
-    
+
     def main(self):
         print("It Works")

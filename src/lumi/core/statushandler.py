@@ -23,4 +23,3 @@ class StatusHandler(Observer):
     def write_to_stdout():
         buf = StringIO()
         sys.stdout = buf
-

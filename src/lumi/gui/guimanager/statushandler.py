@@ -1,5 +1,6 @@
 from lumi.core.statushandler import StatusHandler
 
+
 class GUIStatusHandler(StatusHandler):
     def __init__(self):
         StatusHandler.__init__(self)

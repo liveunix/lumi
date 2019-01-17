@@ -3,6 +3,7 @@ from src.lumi.cli.dispatcher import dispatch
 from src.lumi.cli.parser import parse_args
 from src.lumi.cli.actions.version import VERSION
 
+
 class TestDispatcher(unittest.TestCase):
     """Test the LUMI action dispatcher"""
     def test_dispatcher_call_function(self):

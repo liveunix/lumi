@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from sys import argv
-from .options import register_options
-from .subcommands import SUBCOMMANDS
+from lumi.options import register_options
+from lumi.subcommands import SUBCOMMANDS
 
 parser = ArgumentParser()
 register_options(parser)

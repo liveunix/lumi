@@ -4,7 +4,7 @@ import libmount as mnt
 from os import getuid, getgid, makedirs
 from pathlib import Path
 from xdg.BaseDirectory import xdg_data_home
-from . import grub
+from lumi.linux import grub
 
 def is_partition_mounted(device_fs):
     """Return True if device is mounted"""

@@ -1,5 +1,6 @@
 from lumi.cli import actions
 
+
 def dispatch(action, callback=None):
     if action is None:
         return
@@ -15,4 +16,3 @@ def dispatch(action, callback=None):
         callback = getattr(module, 'dispatch', lambda action: False)
 
     return callback(action)
-

@@ -6,4 +6,3 @@ from lumi import list_all
 from lumi import list
 from lumi import sync
 from lumi import version
-from lumi import help

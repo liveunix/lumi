@@ -10,7 +10,7 @@ def dispatch(action, callback=None):
         try:
             module = getattr(actions, action.command)
         except:
-            print("Type lumi -h to see the commands available")
+            print("Type -h to see the commands available")
             return
 
         callback = getattr(module, "dispatch", lambda action: False)

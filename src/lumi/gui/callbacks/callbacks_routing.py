@@ -4,6 +4,7 @@ ROUTING_OPTIONS = {
         "callback_functions": [
             "callbacks.printok_callback.print_ok",
             "callbacks.print_itworks_callback.it_works",
+            "callbacks.test_distro_description.change_description",
         ],
     }
 }

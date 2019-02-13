@@ -9,5 +9,5 @@ class change_description:
         return istance.main
 
     def main(self):
-        print(self.application.sender().currentItem().text())
+        print(self.application.sender().text())
         self.application.distro_description_textBrowser.setText("TEXT")

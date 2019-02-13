@@ -38,4 +38,7 @@ class ApplicationWindow(QtWidgets.QWidget, Ui_Dialog, GUIEventHandler):
 
     def run(self):
         self.show()
-        sys.exit(self.app.exec_())
+        try:
+            sys.exit(self.app.exec_())
+        except SystemExit as e:
+            pass

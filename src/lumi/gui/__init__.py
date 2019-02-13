@@ -1,1 +1,1 @@
-from lumi.gui import main
+from lumi.gui.gui import main

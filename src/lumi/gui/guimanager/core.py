@@ -20,9 +20,10 @@ class ApplicationWindow(QMainWindow, QtWidgets.QWidget, Ui_Dialog, GUIEventHandl
         self.setup_ui_dialog()
         for index, tabname in enumerate(["tab", "tabddd"]):
             self.setup_tab_structure_with_index_and_name(index, tabname)
+            self.route_callbacks_to_objects(ROUTING_OPTIONS)
 
         self.set_buddies()
-        # self.retranslate_ui_dialog()
+        self.retranslate_ui_dialog()
 
     """
     def _setup_gui_status_handler(self):
@@ -47,11 +48,7 @@ class ApplicationWindow(QMainWindow, QtWidgets.QWidget, Ui_Dialog, GUIEventHandl
         self.statusBar().showMessage("Ready")
         self.setCentralWidget(self.tabWidget)
 
-        #self.w.setCentralWidget(self.tabWidget)
-        #self.menu = QtWidgets.QMenuBar()
         #self._setup_gui_status_handler()
-
-        self.route_callbacks_to_objects(ROUTING_OPTIONS)
 
     def run(self):
         self.show()

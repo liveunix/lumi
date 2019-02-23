@@ -1,26 +1,9 @@
 from argparse import ArgumentParser
 from sys import argv
-from lumi.options import register_options
-from lumi.subcommands import SUBCOMMANDS
+from lumi.cli.subcommands import SUBCOMMANDS
 
-parser = ArgumentParser()
-register_options(parser)
-subparsers = parser.add_subparsers(dest="command")
+def get_parser():
+    parser = ArgumentParser(description="Lumi CLI")
+    subparsers = parser.add_subparsers(dest="action")
 
-for subcommand in SUBCOMMANDS:
-    subparser = subparsers.add_parser(
-        subcommand["command"], help=subcommand["description"]
-    )
-
-    for argument in subcommand["arguments"]:
-        subparser.add_argument(
-            argument["name"], type=argument["type"], help=argument["help"]
-        )
-
-    if subcommand.get("require_options") is not False:
-        register_options(subparser)
-
-
-def parse_args(args=argv, offset=1):
-    """Parse the given commands using the declared parser"""
-    return parser.parse_args(args[offset:])
+    return parser

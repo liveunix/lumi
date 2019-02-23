@@ -1,18 +1,26 @@
+import sys
 from lumi.cli import actions
+from lumi.cli.parser import get_parser
 
 
-def dispatch(action, callback=None):
+def dispatch():
+    parser = get_parser()
+
+    """Print usage when no action is issued"""
+    if len(sys.argv[1:])==0:
+        parser.print_help()
+        parser.exit()
+
+    action = parser.parse_args(sys.argv[1:])
+
     if action is None:
         return
 
     """Invoke the right callback for the given action"""
-    if callback is None:
-        try:
-            module = getattr(actions, action.command)
-        except:
-            print("Type -h to see the commands available")
-            return
+    try:
+        module = getattr(actions, action.command)
+    except:
+        return
 
-        callback = getattr(module, "dispatch", lambda action: False)
-
-    return callback(action)
+    callback = getattr(module, "dispatch", lambda action: False)
+    callback(action)

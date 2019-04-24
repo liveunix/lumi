@@ -1,24 +1,25 @@
-# LUMI ( LiveUnix Multiboot ISO )
+# lumi ( LiveUnix Multiboot Iso )
 
-LUMI manages live images and stages of various systems (_UNIX_ based) on a removable device,
+lumi manages live images and stages of various systems (_UNIX_ based) on a removable device,
 letting the user choose one live image on boot (using GRUB).
 
 ## CLI
 
 Here it's a list of all the available commands:
 
-Command                                          | Description                                                   | Example
------------------------------------------------- | -----------------------------------------------------------   | -----------------------------------
-`lumi` or `lumi -h`                              | Get Lumi usage
-`lumi add <name:version> <device>`               | Add the live image (or stage) on the device                   | `lumi add exherbo:20180618 /dev/sdb`
-`lumi show-device <device>`                      | Show live images and stages present on the device             | `lumi show-device /dev/sdb`
-`lumi show-system <name>`                        | Show information about a given system                         | `lumi show-system parabola`
-`lumi delete <distro:version> <device>`          | Remove the live image (or stage) from the device              | `lumi delete ubuntu:18.04 /dev/sdb`
-`lumi list-all`                                  | List all the available systems                                | `lumi list-all --stage3`
-`lumi list <name>`                               | List all the live images and stages available for that system | `lumi list antergos`
-`lumi sync`                                      | Sync the LUMI database                                        | `lumi sync`
-`lumi [command] -h` or `lumi [command] --help`   | Get information about the commands or a specific one          | `lumi list-all --help`
-=======
+Command                                 | Description                                                      | Example
+--------------------------------------- | -----------------------------------------------------------      | -----------------------------------
+`lumi`                                  | Get lumi usage
+`lumi setup <device>`                   | Setup lumi on a device                                           | `lumi setup /dev/sdb1`
+`lumi add <name:version>...`            | Add the live image(s) or stage(s) on a device                    | `lumi add arch:2019.04.01`
+`lumi show <device>`                    | Show live images and stages present on the device                | `lumi show /dev/sdb`
+`lumi show <name:version>`              | Show information about a given system and its live images/stages | `lumi show parabola`
+`lumi delete <name:version>..`          | Remove the live image (or stage) from the device                 | `lumi delete ubuntu:18.04`
+`lumi list`                             | List all the live images and stages available for that system    | `lumi list exherbo`
+`lumi update`                           | Update all the systems
+`lumi sync`                             | Update the systems database
+`lumi [command] -h`                     | Get information about the commands or a specific one             | `lumi list -h`
+
 ## Contributing
 
 ### Installation
